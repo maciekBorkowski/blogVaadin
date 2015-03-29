@@ -85,14 +85,14 @@ public class Articles extends CustomComponent {
                 remove.addClickListener(clickEvent -> {
                     MainUI root = (MainUI)this.getParent().getParent().getParent();
                     ConfirmDialog.show(root, Constant.Label.CONFIRM,
-                            new ConfirmDialog.Listener() {
-                                public void onClose(ConfirmDialog dialog) {
-                                    if (dialog.isConfirmed()) {
-                                        Data.articles.remove(article);
-                                        root.getPage().reload();
-                                    }
+                        new ConfirmDialog.Listener() {
+                            public void onClose(ConfirmDialog dialog) {
+                                if (dialog.isConfirmed()) {
+                                    Data.articles.remove(article);
+                                    root.getPage().reload();
                                 }
-                            });
+                            }
+                    });
                 });
                 manager.addComponent(remove);
                 manager.setStyleName("margin");

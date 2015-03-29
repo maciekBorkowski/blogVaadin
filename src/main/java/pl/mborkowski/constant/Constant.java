@@ -11,18 +11,17 @@ public class Constant {
         public static final String LOGIN_BUTTON = "Zaloguj";
         public static final String CANCEL = "Anuluj";
         public static final String LOGOUT = "Wyloguj";
-        public static final String REGISTER = "Zarejestruj się";
-        public static final String PASSWORD_REPEAT = "Powtórz hasło";
         public static final String ARTICLES = "Artykuły";
         public static final String USERS = "Blogerzy";
         public static final String NAME = "Nazwa użytkownika";
         public static final String REGISTER_DATE = "Data rejestracji";
-        public static final String IS_LOGGED = "Aktualnie zalogowany";
         public static final String TITLE = "Tytuł wpisu";
         public static final String TEXT = "Treść";
         public static final String SAVE = "Dodaj wpis";
         public static final String BACK = "Wróć";
         public static final String CONFIRM = "Czy napewno chcesz usunąć ten wpis?";
+        public static final String EDIT = "Edytuj";
+        public static final String DELETE = "Usuń";
     }
     public class UI{
         public static final String DEFAULT_UI_SIZE = "1200px";

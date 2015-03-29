@@ -11,8 +11,19 @@ import java.util.Date;
  */
 
 public class Blogger {
+
+    public Blogger () {}
+
+    public Blogger (Blogger blogger) {
+        this.setName(blogger.getName());
+        this.setLogin(blogger.getLogin());
+        this.setPassword(blogger.getPassword());
+        this.setLogged(blogger.getLogged());
+        this.setRegistered(blogger.getRegistered());
+    }
+
     @Size(min=3, message = Constant.Validation.SIZE)
-    private String name;
+    private String name = "";
     @Size(min=3, message = Constant.Validation.SIZE)
     private String login = "";
     @Size(min=3, message = Constant.Validation.SIZE)
