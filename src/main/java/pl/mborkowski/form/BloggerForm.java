@@ -5,9 +5,7 @@ import com.vaadin.data.fieldgroup.FieldGroup;
 import com.vaadin.data.util.BeanItem;
 import com.vaadin.ui.*;
 import pl.mborkowski.Data;
-import pl.mborkowski.bean.Article;
 import pl.mborkowski.bean.Blogger;
-import pl.mborkowski.components.Articles;
 import pl.mborkowski.components.Bloggers;
 import pl.mborkowski.constant.Constant;
 import pl.mborkowski.ui.MainUI;
@@ -43,9 +41,8 @@ public class BloggerForm extends CustomComponent {
     private void addFormFieldsToLayout(){
         formLayout.addComponents(binder.buildAndBind(Constant.Label.NAME, "name"),
                 binder.buildAndBind(Constant.Label.LOGIN, "login"),
-                binder.buildAndBind(Constant.Label.PASSWORD, "password")
+                binder.buildAndBind(Constant.Label.PASSWORD, "password", PasswordField.class)
         );
-
         HorizontalLayout buttons = new HorizontalLayout();
         buttons.addComponent(back);
         buttons.addComponent(save);

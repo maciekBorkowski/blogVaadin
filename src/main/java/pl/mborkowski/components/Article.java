@@ -1,11 +1,8 @@
 package pl.mborkowski.components;
 
-import com.vaadin.server.FontAwesome;
-import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.ui.*;
 import pl.mborkowski.constant.Constant;
 import pl.mborkowski.form.ArticleForm;
-import pl.mborkowski.form.UserForm;
 
 /**
  * Created by borek on 28.03.15.
@@ -13,8 +10,6 @@ import pl.mborkowski.form.UserForm;
 public class Article extends CustomComponent {
 
     private VerticalLayout layout;
-    private HorizontalLayout menu;
-    private Button save, back;
     private ArticleForm articleForm;
 
     public Article(){

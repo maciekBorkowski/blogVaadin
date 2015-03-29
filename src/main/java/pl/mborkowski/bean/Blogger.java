@@ -1,5 +1,6 @@
 package pl.mborkowski.bean;
 
+import org.hibernate.validator.constraints.NotEmpty;
 import pl.mborkowski.constant.Constant;
 
 import javax.validation.constraints.NotNull;

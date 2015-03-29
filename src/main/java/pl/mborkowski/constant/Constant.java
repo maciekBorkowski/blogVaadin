@@ -17,11 +17,13 @@ public class Constant {
         public static final String REGISTER_DATE = "Data rejestracji";
         public static final String TITLE = "Tytuł wpisu";
         public static final String TEXT = "Treść";
-        public static final String SAVE = "Dodaj wpis";
+        public static final String SAVE = "Zapisz";
         public static final String BACK = "Wróć";
         public static final String CONFIRM = "Czy napewno chcesz usunąć ten wpis?";
         public static final String EDIT = "Edytuj";
         public static final String DELETE = "Usuń";
+        public static final String PASSWORD_REPEAT = "Powtórz hasło";
+
     }
     public class UI{
         public static final String DEFAULT_UI_SIZE = "1200px";
@@ -30,6 +32,9 @@ public class Constant {
     public class Validation {
         public static final String INVALID_CREDITALS = "Nieprawidłowe dane logowania";
         public static final String SIZE = "Podana wartość jest za krótka";
+        public static final String NOT_NULL = "Podana wartość nie może być pusta";
+        public static final String INVALID_PASSWORDS = "Podane hasła nie są takie same";
+
     }
 
     public class Notification{
