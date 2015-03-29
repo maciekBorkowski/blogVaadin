@@ -1,11 +1,13 @@
 package pl.mborkowski.bean;
 
+import com.vaadin.ui.Image;
 import org.hibernate.validator.constraints.NotEmpty;
 import pl.mborkowski.constant.Constant;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.io.File;
 import java.net.URI;
 import java.util.Date;
 import java.util.List;
@@ -30,7 +32,7 @@ public class Article {
     private String text = "";
     private Date published;
     private Date lastUpdate;
-    private List<URI> attachedFiles;
+    private String attachedFiles;
 
     public String getText() {
         return text;
@@ -64,11 +66,11 @@ public class Article {
         this.title = title;
     }
 
-    public List<URI> getAttachedFiles() {
+    public String getAttachedFiles() {
         return attachedFiles;
     }
 
-    public void setAttachedFiles(List<URI> attachedFiles) {
+    public void setAttachedFiles(String attachedFiles) {
         this.attachedFiles = attachedFiles;
     }
 

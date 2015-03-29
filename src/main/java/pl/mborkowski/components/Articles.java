@@ -1,5 +1,6 @@
 package pl.mborkowski.components;
 
+import com.vaadin.server.FileResource;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.shared.ui.label.ContentMode;
@@ -8,6 +9,9 @@ import org.vaadin.dialogs.ConfirmDialog;
 import pl.mborkowski.Data;
 import pl.mborkowski.constant.Constant;
 import pl.mborkowski.ui.MainUI;
+
+import java.io.File;
+import java.io.FileOutputStream;
 
 /**
  * Created by borek on 28.03.15.
@@ -18,6 +22,7 @@ public class Articles extends CustomComponent {
     private HorizontalLayout menu;
     private Button add;
     private VerticalLayout articles;
+    private Image image;
 
     public Articles(){
         layout  = new VerticalLayout();
@@ -58,8 +63,9 @@ public class Articles extends CustomComponent {
         articles.addStyleName("outlined");
         articles.setHeight(100.0f, Unit.PERCENTAGE);
         articles.setVisible(true);
-
+        
         for (pl.mborkowski.bean.Article article : Data.articles) {
+            image = new Image();
             Panel panel = new Panel(article.getTitle() + "\n\n" + "Artykuł dodano: " + article.getPublished());
 
             Label content = new Label(article.getText());
@@ -67,8 +73,14 @@ public class Articles extends CustomComponent {
             content.setIcon(FontAwesome.CLOUD);
             content.setContentMode(ContentMode.HTML);
             panel.setContent(content);
-
-
+            if(article.getAttachedFiles() != null){
+                String filename = "/tmp/uploads/" + article.getAttachedFiles();
+                File file = new File(filename);
+                FileResource fileResource = new FileResource(file);
+                image.setSource(fileResource);
+                image.setHeight("200");
+                articles.addComponent(image);
+            }
             articles.addComponent(panel);
 
             if(Bloggers.isLoggedIn()) {

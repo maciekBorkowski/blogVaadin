@@ -23,7 +23,8 @@ public class Constant {
         public static final String EDIT = "Edytuj";
         public static final String DELETE = "Usuń";
         public static final String PASSWORD_REPEAT = "Powtórz hasło";
-
+        public static final String UPLOAD = "Dodaj obrazek";
+        public static final String ADD = "Dodaj";
     }
     public class UI{
         public static final String DEFAULT_UI_SIZE = "1200px";
@@ -32,9 +33,8 @@ public class Constant {
     public class Validation {
         public static final String INVALID_CREDITALS = "Nieprawidłowe dane logowania";
         public static final String SIZE = "Podana wartość jest za krótka";
-        public static final String NOT_NULL = "Podana wartość nie może być pusta";
-        public static final String INVALID_PASSWORDS = "Podane hasła nie są takie same";
-
+        public static final String TOO_BIG = "Plik jest za duży";
+        public static final String NOT_IMAGE = "Plik nie jest obrazem";
     }
 
     public class Notification{

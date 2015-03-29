@@ -9,6 +9,7 @@ import pl.mborkowski.bean.Article;
 import pl.mborkowski.components.Articles;
 import pl.mborkowski.constant.Constant;
 import pl.mborkowski.ui.MainUI;
+import pl.mborkowski.utils.FileReceiver;
 
 import javax.xml.soap.Text;
 import java.util.Date;
@@ -24,6 +25,8 @@ public class ArticleForm extends CustomComponent {
     private BeanItem<Article> item;
     private Article article;
     private Article oldArticle;
+    final Image image = new Image("Uploaded Image");
+    private String filename;
 
     public ArticleForm(){
         article = new Article();
@@ -45,14 +48,25 @@ public class ArticleForm extends CustomComponent {
         text = new TextArea(Constant.Label.TEXT);
         text.setSizeFull();
         text.setValue(article.getText());
+        image.setVisible(false);
         formLayout.addComponent(text);
+
+        Panel panel = new Panel();
+        Layout panelContent = new VerticalLayout();
+        Upload upload = this.prepareReceiverImage();
+        panelContent.addComponents(upload, image);
+        panel.setContent(panelContent);
+        formLayout.addComponent(panel);
 
         HorizontalLayout buttons = new HorizontalLayout();
         buttons.addComponent(back);
         buttons.addComponent(save);
         formLayout.addComponent(buttons);
         formLayout.setMargin(true);
+
         setCompositionRoot(formLayout);
+
+
     }
 
     private void customizeFormValidation(Article article){
@@ -69,10 +83,12 @@ public class ArticleForm extends CustomComponent {
                 Article editArticle = Data.articles.get(Data.articles.indexOf(oldArticle));
                 editArticle.setText(text.getValue());
                 editArticle.setTitle(item.getBean().getTitle());
+                editArticle.setAttachedFiles(filename);
             } else {
                 article.setPublished(new Date());
                 article.setLastUpdate(new Date());
                 article.setText(text.getValue());
+                article.setAttachedFiles(filename);
                 Data.articles.add(article);
             }
             MainUI root = (MainUI)this.getParent().getParent().getParent().getParent().getParent();
@@ -86,4 +102,43 @@ public class ArticleForm extends CustomComponent {
         MainUI root = (MainUI)this.getParent().getParent().getParent().getParent().getParent();
         root.setPageContent(new Articles());
     });
+
+    private Upload prepareReceiverImage() {
+        FileReceiver receiver = new FileReceiver(image);
+
+        final Upload upload = new Upload(Constant.Label.UPLOAD, receiver);
+        upload.setButtonCaption(Constant.Label.ADD);
+        upload.addSucceededListener(receiver);
+
+        final long UPLOAD_LIMIT = 1000000l;
+        upload.addStartedListener(new Upload.StartedListener() {
+            @Override
+            public void uploadStarted(Upload.StartedEvent event) {
+                filename = event.getFilename();
+                if (!event.getMIMEType().contains("image")) {
+                    Notification.show(Constant.Validation.NOT_IMAGE,
+                            Notification.Type.ERROR_MESSAGE);
+                    upload.interruptUpload();
+                }
+                if (event.getContentLength() > UPLOAD_LIMIT) {
+                    Notification.show(Constant.Validation.TOO_BIG,
+                            Notification.Type.ERROR_MESSAGE);
+                    upload.interruptUpload();
+                }
+            }
+        });
+
+        upload.addProgressListener(new Upload.ProgressListener() {
+            @Override
+            public void updateProgress(long readBytes, long contentLength) {
+                if (readBytes > UPLOAD_LIMIT) {
+                    Notification.show(Constant.Validation.TOO_BIG,
+                            Notification.Type.ERROR_MESSAGE);
+                    upload.interruptUpload();
+                }
+            }
+        });
+        return upload;
+    }
+
 }
